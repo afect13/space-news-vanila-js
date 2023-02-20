@@ -1,0 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Quantico:wght@400;700&display=swap");
+
+html {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: whitesmoke;
+  overflow-x: hidden;
+  font-family: "Quantico", sans-serif;
+  font-size: 1rem;
+  line-height: 1.8rem;
+}
+
