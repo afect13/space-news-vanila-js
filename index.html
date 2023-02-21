@@ -8,7 +8,33 @@
     <link rel="icon" type="image/png" href="" />
   </head>
   <body>
-    <h1>Hellow world</h1>
+    <header class="header">
+      <div class="layer">
+        <div class="layer-header">
+          <div class="layers-title">SPACE NEWS</div>
+        </div>
+        <div class="layer layers-base"></div>
+        <div class="layer layers-title"></div>
+        <div class="layer layers-front"></div>
+      </div>
+    </header>
+    <div class="loader hidden">
+      <img src="/image/rocket.svg" alt="rocket animation" />
+    </div>
+    <div class="container">
+      <div class="nav-container">
+        <span class="nav-items" id="resultsNav">
+          <h3 id="favorite" class="clickble">Favorites</h3>
+          <h3>•</h3>
+          <h3 id="news" class="clickble">News</h3>
+        </span>
+      </div>
+      <div class="images-container"></div>
+    </div>
+
+    <div class="save-confirmed" hidden>
+      <h1>ADDED!</h1>
+    </div>
     <script src="script.js"></script>
   </body>
 </html>
