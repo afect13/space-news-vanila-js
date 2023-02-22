@@ -3,16 +3,18 @@ const saveConfirmed = document.querySelector(".save-confirmed");
 const loader = document.querySelector(".loader");
 const favoriteButton = document.getElementById("favorite");
 const newsButton = document.getElementById("news");
-// last 10 day
+const headerLayer = document.querySelector(".layer-header");
+const baseLayer = document.querySelector(".layers-base");
+const middleaLayer = document.querySelector(".layers-middle-amount");
+const middlefLayer = document.querySelector(".layers-middle-forest");
+const frontLayer = document.querySelector(".layers-front");
 const startDate = new Date();
 startDate.setDate(startDate.getDate() - 10);
 const year = startDate.getFullYear();
 const month = startDate.getMonth() + 1 < 10 ? "0" + (startDate.getMonth() + 1) : startDate.getMonth() + 1;
 const day = startDate.getDate();
-// URL and API key
 const apiKey = "DEMO_KEY";
 const apiURL = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&start_date=${year}-${month}-${day}`;
-// array news
 let newsArray = [];
 let favorites = {};
 
@@ -132,6 +134,15 @@ favoriteButton.addEventListener("click", () => {
 
 newsButton.addEventListener("click", () => {
   createNewsDOM("news");
+});
+
+
+window.addEventListener("scroll", () => {
+  headerLayer.style.cssText = `transform: translate3d(0, calc(${scrollY}px / 2), 0)`;
+  baseLayer.style.cssText = `transform: translate3d(0, calc(${scrollY}px  / 1.6), 0)`;
+  middleaLayer.style.cssText = `transform: translate3d(0, calc(${scrollY}px  / 2.5), 0)`;
+  middlefLayer.style.cssText = `transform: translate3d(0, calc(${scrollY}px  / 4.5), 0)`;
+  frontLayer.style.cssText = `transform: translate3d(0, calc(${scrollY}px  / 5.8), 0)`;
 });
 
 getNasaInfo();
