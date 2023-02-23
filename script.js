@@ -1,4 +1,4 @@
-const imagesContainer = document.querySelector(".images-container");
+const imagesContainer = document.querySelector(".news-container");
 const saveConfirmed = document.querySelector(".save-confirmed");
 const loader = document.querySelector(".loader");
 const favoriteButton = document.getElementById("favorite");
@@ -22,13 +22,16 @@ function createNewsDOM(page) {
   let currentArray = [];
   if (page == "favorites") {
     currentArray = Object.values(favorites);
+    newsButton.classList.remove("active");
+    favoriteButton.classList.add("active");
     imagesContainer.replaceChildren();
   }
   if (page === "news") {
     currentArray = newsArray;
+    favoriteButton.classList.remove("active");
+    newsButton.classList.add("active");
     imagesContainer.replaceChildren();
   }
-
   currentArray.forEach((news) => {
     const card = document.createElement("div");
     card.classList.add("card");
@@ -49,7 +52,7 @@ function createNewsDOM(page) {
     cardTitle.classList.add("card-title");
     cardTitle.textContent = news.title;
     const saveText = document.createElement("p");
-    saveText.classList.add("clickble");
+    saveText.classList.add("clickble", "clickble-blue");
 
     if (page === "news") {
       saveText.textContent = "add to favorites";
@@ -69,17 +72,20 @@ function createNewsDOM(page) {
     cardText.classList.add("card-text");
     cardText.textContent = news.explanation;
 
-    const footer = document.createElement("small");
-    footer.classList.add("text-muted");
+    const footer = document.createElement("div");
+    footer.classList.add("card-bottom");
     // date
     const date = document.createElement("strong");
     date.textContent = news.date;
     const copyright = document.createElement("span");
     copyright.textContent = ` ${news.copyright === undefined ? "" : news.copyright}`;
+    const dateBlock = document.createElement("div");
+    dateBlock.classList.add("card-date");
 
     // append
-    footer.append(date, copyright);
-    cardBody.append(cardTitle, saveText, cardText, footer);
+    dateBlock.append(date, copyright);
+    footer.append(dateBlock, saveText);
+    cardBody.append(cardTitle, cardText, footer);
     link.append(image);
     card.append(link, cardBody);
     imagesContainer.append(card);
@@ -135,7 +141,6 @@ favoriteButton.addEventListener("click", () => {
 newsButton.addEventListener("click", () => {
   createNewsDOM("news");
 });
-
 
 window.addEventListener("scroll", () => {
   headerLayer.style.cssText = `transform: translate3d(0, calc(${scrollY}px / 2), 0)`;
