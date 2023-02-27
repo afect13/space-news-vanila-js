@@ -127,7 +127,7 @@ header {
 }
 
 .clickble-blue {
-  color:#4776a3;
+  color: #4776a3;
 }
 
 /* .clickble:hover {
@@ -135,11 +135,11 @@ header {
 } */
 
 .clickble-blue:hover {
-  color:#0084ff;
+  color: #0084ff;
 }
 
 .active {
-  color:#4776a3;
+  color: #4776a3;
 }
 
 .news-container {
@@ -188,16 +188,39 @@ header {
 }
 
 .card-date span {
- margin-left: 5px;
+  margin-left: 5px;
 }
 
 footer {
   position: relative;
   display: flex;
+  justify-content: center;
   width: 100%;
   height: 400px;
   background: #090d15;
 }
+
+.footer-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items:center;
+  width: 800px;
+  height: 400px;
+  background: url(image/moon.webp);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.footer-container h3 {
+  font-size: calc(var(--index) * 3);
+  color:#cbd7e4;
+  margin: 0;
+  text-shadow: 0 0 15px #bbbbac;
+  text-transform: uppercase;
+}
+
 
 .loader {
   background: whitesmoke;
