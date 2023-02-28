@@ -9,7 +9,7 @@ It's a JavaScript site, but you'll need `node` installed.
 
 ``` bash
 $ git clone https://github.com/afect13/space-news-vanila-js.git
-$ cd site
+$ cd space-news-vanila-js
 ```
 
 Then run development server and open localhost in your browser.
