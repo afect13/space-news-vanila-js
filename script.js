@@ -1,4 +1,4 @@
-const imagesContainer = document.querySelector(".news-container");
+const newsContainer = document.querySelector(".news-container");
 const saveConfirmed = document.querySelector(".save-confirmed");
 const loader = document.querySelector(".loader");
 const favoriteButton = document.getElementById("favorite");
@@ -24,13 +24,30 @@ function createNewsDOM(page) {
     currentArray = Object.values(favorites);
     newsButton.classList.remove("active");
     favoriteButton.classList.add("active");
-    imagesContainer.replaceChildren();
+    newsContainer.replaceChildren();
   }
   if (page === "news") {
     currentArray = newsArray;
     favoriteButton.classList.remove("active");
     newsButton.classList.add("active");
-    imagesContainer.replaceChildren();
+    newsContainer.replaceChildren();
+  }
+  if (currentArray.length === 0 && page == "favorites") {
+    const emptyPage = document.createElement("div");
+    emptyPage.classList.add("empty-page");
+    const emptyImage = document.createElement("img");
+    emptyImage.classList.add("empty-image");
+    emptyImage.src = "image/rocket_fav.webp";
+    emptyImage.alt = "rocket";
+    const emptyText = document.createElement("div");
+    emptyText.classList.add("empty-text");
+    const emptyTitle = document.createElement("h2");
+    emptyTitle.textContent = "Ooops, post list is empty";
+    const emptyParagraph = document.createElement("p");
+    emptyParagraph.textContent = "Add your favorite posts in the news section";
+    emptyPage.append(emptyText, emptyImage);
+    emptyText.append(emptyTitle, emptyParagraph);
+    newsContainer.append(emptyPage);
   }
   currentArray.forEach((news) => {
     const card = document.createElement("div");
@@ -88,7 +105,7 @@ function createNewsDOM(page) {
     cardBody.append(cardTitle, cardText, footer);
     link.append(image);
     card.append(link, cardBody);
-    imagesContainer.append(card);
+    newsContainer.append(card);
   });
 }
 
@@ -116,7 +133,6 @@ function saveFavorite(itemUrl) {
   newsArray.forEach((item) => {
     if (item.url.includes(itemUrl) && !favorites[itemUrl]) {
       favorites[itemUrl] = item;
-      console.log(favorites);
       saveConfirmed.hidden = false;
       setTimeout(() => {
         saveConfirmed.hidden = true;
@@ -134,12 +150,30 @@ function removeFavorites(itemUrl) {
   }
 }
 
-favoriteButton.addEventListener("click", () => {
-  createNewsDOM("favorites");
+// let coordinatFav;
+// let coordinatNews;
+// console.log(coordinatFav);
+// function handleScrollToTop(y) {
+//   let coordinat = y;
+//   return function scrollBack() {
+//     window.scrollTo(0, coordinat);
+//   };
+// }
+newsButton.addEventListener("click", () => {
+  // console.log(newsContainer.scrollY);
+  // coordinatFav = handleScrollToTop(window.scrollY);
+  createNewsDOM("news");
+  // if (coordinatNews !== undefined) {
+  //   coordinatNews();
+  // }
 });
 
-newsButton.addEventListener("click", () => {
-  createNewsDOM("news");
+favoriteButton.addEventListener("click", () => {
+  // coordinatNews = handleScrollToTop(window.scrollY);
+  createNewsDOM("favorites");
+  // if (coordinatFav !== undefined) {
+  //   coordinatFav();
+  // }
 });
 
 window.addEventListener("scroll", () => {
