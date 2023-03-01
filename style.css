@@ -130,10 +130,6 @@ header {
   color: #4776a3;
 }
 
-/* .clickble:hover {
-  color: #4776a3;
-} */
-
 .clickble-blue:hover {
   color: #0084ff;
 }
@@ -191,6 +187,30 @@ header {
   margin-left: 5px;
 }
 
+.empty-page {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  height: 500px;
+}
+.empty-text {
+  width: 100%;
+}
+
+.empty-text h2 {
+  font-size: 40px;
+  text-align: center;
+}
+.empty-text p {
+  font-size: 20px;
+  text-align: center;
+}
+.empty-image {
+  width: 300px;
+  height: 300px;
+}
+
 footer {
   position: relative;
   display: flex;
@@ -204,7 +224,7 @@ footer {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items:center;
+  align-items: center;
   width: 800px;
   height: 400px;
   background: url(image/moon.webp);
@@ -215,12 +235,11 @@ footer {
 
 .footer-container h3 {
   font-size: calc(var(--index) * 3);
-  color:#cbd7e4;
+  color: #cbd7e4;
   margin: 0;
   text-shadow: 0 0 15px #bbbbac;
   text-transform: uppercase;
 }
-
 
 .loader {
   background: whitesmoke;
@@ -257,6 +276,24 @@ footer {
   .news-container {
     width: 100%;
   }
+  .empty-page {
+    padding: 0 30px;
+    flex-direction: column;
+    height: 400px;
+  }
+  .empty-text h2 {
+  font-size: 28px;
+  text-align: center;
+}
+.empty-text p {
+  font-size: 18px;
+  text-align: center;
+}
+.empty-image {
+  width: 200px;
+  height: 200px;
+}
+
   text-muted .card-title {
     font-size: 20px;
   }
