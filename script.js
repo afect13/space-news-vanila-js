@@ -15,6 +15,9 @@ const month = startDate.getMonth() + 1 < 10 ? "0" + (startDate.getMonth() + 1) :
 const day = startDate.getDate();
 const apiKey = "DEMO_KEY";
 const apiURL = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&start_date=${year}-${month}-${day}`;
+let coordinatFavorite = document.documentElement.clientHeight;
+let coordinatNews = document.documentElement.clientHeight;
+
 let newsArray = [];
 let favorites = {};
 
@@ -48,6 +51,18 @@ function createNewsDOM(page) {
     emptyPage.append(emptyText, emptyImage);
     emptyText.append(emptyTitle, emptyParagraph);
     newsContainer.append(emptyPage);
+  }
+  if (Object.keys(currentArray) == "error") {
+    loader.classList.add("hidden");
+    const errorPage = document.createElement("div");
+    errorPage.classList.add("error-page");
+    const errorTitle = document.createElement("h3");
+    errorTitle.textContent = "Request limit exceeded";
+    const errorMessege = document.createElement("p");
+    errorMessege.textContent = "Please come back later";
+    errorPage.append(errorTitle, errorMessege);
+    newsContainer.append(errorPage);
+    return;
   }
   currentArray.forEach((news) => {
     const card = document.createElement("div");
@@ -124,8 +139,9 @@ async function getNasaInfo() {
     newsArray = await res.json();
     newsArray.reverse();
     updateInfo("news");
-  } catch (err) {
-    // err
+  } catch (error) {
+    loader.classList.add("hidden");
+    createNewsDOM("news");
   }
 }
 
@@ -150,30 +166,20 @@ function removeFavorites(itemUrl) {
   }
 }
 
-// let coordinatFav;
-// let coordinatNews;
-// console.log(coordinatFav);
-// function handleScrollToTop(y) {
-//   let coordinat = y;
-//   return function scrollBack() {
-//     window.scrollTo(0, coordinat);
-//   };
-// }
+function handleScrollTo(coord) {
+  scrollTo(0, coord);
+}
+
 newsButton.addEventListener("click", () => {
-  // console.log(newsContainer.scrollY);
-  // coordinatFav = handleScrollToTop(window.scrollY);
+  coordinatFavorite = window.pageYOffset;
   createNewsDOM("news");
-  // if (coordinatNews !== undefined) {
-  //   coordinatNews();
-  // }
+  handleScrollTo(coordinatNews);
 });
 
 favoriteButton.addEventListener("click", () => {
-  // coordinatNews = handleScrollToTop(window.scrollY);
+  coordinatNews = window.pageYOffset;
   createNewsDOM("favorites");
-  // if (coordinatFav !== undefined) {
-  //   coordinatFav();
-  // }
+  handleScrollTo(coordinatFavorite);
 });
 
 window.addEventListener("scroll", () => {
